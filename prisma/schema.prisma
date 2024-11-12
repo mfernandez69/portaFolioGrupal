@@ -9,3 +9,39 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+//-----------------------------------------------------
+model Colaborador {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  nombre                String
+  contacto              Contacto
+  lenguajesProgramacion String[]
+  proyectosIndividuales ProyectoIndividual[]
+  proyectosGrupales     ProyectoGrupal[] @relation(fields: [proyectoGrupalIds], references: [id])
+  proyectoGrupalIds     String[]         @db.ObjectId
+}
+
+model ProyectoIndividual {
+  id                 String     @id @default(auto()) @map("_id") @db.ObjectId
+  nombre             String
+  descripcion        String
+  lenguajesUtilizados String[]
+  enlacesGithub      String[]
+  colaborador        Colaborador @relation(fields: [colaboradorId], references: [id])
+  colaboradorId      String     @db.ObjectId
+}
+
+model ProyectoGrupal {
+  id                 String       @id @default(auto()) @map("_id") @db.ObjectId
+  nombre             String
+  descripcion        String
+  lenguajesUtilizados String[]
+  enlacesGithub      String[]
+  colaboradores      Colaborador[] @relation(fields: [colaboradorIds], references: [id])
+  colaboradorIds     String[]      @db.ObjectId
+}
+
+type Contacto {
+  email          String  
+  usuarioGithub  String  
+  numeroTelefono String?
+}
