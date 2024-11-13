@@ -9,39 +9,44 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
 //-----------------------------------------------------
 model Colaborador {
-  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  id                    String               @id @default(auto()) @map("_id") @db.ObjectId
+  idPersonal            Int?                 @unique
   nombre                String
   contacto              Contacto
   lenguajesProgramacion String[]
-  proyectosIndividuales ProyectoIndividual[]
-  proyectosGrupales     ProyectoGrupal[] @relation(fields: [proyectoGrupalIds], references: [id])
-  proyectoGrupalIds     String[]         @db.ObjectId
+  proyectosIndividuales ProyectoIndividual[] @relation(fields: [proyectoIndividualIds], references: [id])
+  proyectoIndividualIds String[]             @db.ObjectId
+  proyectosGrupales     ProyectoGrupal[]     @relation(fields: [proyectoGrupalIds], references: [id])
+  proyectoGrupalIds     String[]             @db.ObjectId
 }
 
 model ProyectoIndividual {
-  id                 String     @id @default(auto()) @map("_id") @db.ObjectId
-  nombre             String
-  descripcion        String
+  id                  String        @id @default(auto()) @map("_id") @db.ObjectId
+  idPersonal          Int?
+  nombre              String
+  descripcion         String
   lenguajesUtilizados String[]
-  enlacesGithub      String[]
-  colaborador        Colaborador @relation(fields: [colaboradorId], references: [id])
-  colaboradorId      String     @db.ObjectId
+  enlacesGithub       String[]
+  colaboradores       Colaborador[] @relation(fields: [colaboradorIds], references: [id])
+  colaboradorIds      String[]      @db.ObjectId
 }
 
 model ProyectoGrupal {
-  id                 String       @id @default(auto()) @map("_id") @db.ObjectId
-  nombre             String
-  descripcion        String
+  id                  String        @id @default(auto()) @map("_id") @db.ObjectId
+  idPersonal          Int?
+  nombre              String
+  descripcion         String
   lenguajesUtilizados String[]
-  enlacesGithub      String[]
-  colaboradores      Colaborador[] @relation(fields: [colaboradorIds], references: [id])
-  colaboradorIds     String[]      @db.ObjectId
+  enlacesGithub       String[]
+  colaboradores       Colaborador[] @relation(fields: [colaboradorIds], references: [id])
+  colaboradorIds      String[]      @db.ObjectId
 }
 
 type Contacto {
-  email          String  
-  usuarioGithub  String  
-  numeroTelefono String?
+  email          String  @default("correoPersonal")
+  usuarioGithub  String  @default("perfilGithub")
+  numeroTelefono String? @default("000000000")
 }
