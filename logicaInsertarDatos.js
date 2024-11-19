@@ -155,6 +155,26 @@ async function insertarVariosDocumentos() {
         include: {
           colaboradores: true
         }
+      }),
+      prisma.proyectoGrupal.create({
+        data: {
+          idPersonal: 4,
+          nombre: 'DOOM',
+          descripcion: 'Videojuego DOOM desarrollado en Unity',
+          lenguajesUtilizados: ['C#'],
+          enlacesGithub: ['https://github.com/Jestebanl/Doom3D'],
+          colaboradores: {
+            connect: [
+              { id: colaboradores[0].id },
+              { id: colaboradores[1].id },
+              { id: colaboradores[2].id },
+              { id: colaboradores[3].id }
+            ]
+          }
+        },
+        include: {
+          colaboradores: true
+        }
       })
     ]);
 
