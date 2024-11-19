@@ -1,27 +1,36 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
+const path = require('path');
 
-// creamos servidor de apps
-
+// Creamos servidor de apps
 const app = express();
 
-// politica de cache
-//app.enable("view cache");
+// Configuración de handlebars
+app.engine("handlebars", exphbs.engine({
+    defaultLayout: 'main',
+    layoutsDir: path.join(__dirname, 'views/layouts')
+}));
 
-// configuracion de handlebars
 
-app.engine("handlebars", exphbs.engine())
+
+app.engine("handlebars", exphbs.engine({
+    defaultLayout: 'main',
+    layoutsDir: path.join(__dirname, 'views/layouts'),
+    partialsDir: path.join(__dirname, 'views/partials')
+}));
 
 app.set("view engine", "handlebars");
+app.set('views', path.join(__dirname, 'views'));
 
-app.get("/", (req, res)=>{
-    res.render("mysite");
-});
+// Configuración de archivos estáticos
+app.use(express.static(path.join(__dirname, 'public')));
 
-const mysite = require("./routes/mysite");
-const { title } = require('process');
-app.use("/main", mysite);
+// Importar rutas
+const mysiteRoutes = require("./routes/mysite");
 
-app.use(express.static("public"));
+// Usar las rutas
+app.use("/", mysiteRoutes);
 
-app.listen(3000);
+// Iniciar el servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Servidor corriendo en el puerto ${PORT}`));

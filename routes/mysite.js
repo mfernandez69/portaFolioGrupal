@@ -1,9 +1,21 @@
-const express = require("express");
-
-//Traemos routador de express
+const express = require('express');
 const router = express.Router();
+const { PrismaClient } = require('@prisma/client');
 
-router.get("/",(req,res)=>{
-    res.render("mysite",{layout:"main"});
+const prisma = new PrismaClient();
+
+router.get('/', async (req, res) => {
+    try {
+        const proyectoGrupales = await prisma.proyectoGrupal.findMany({
+            include: {
+                colaboradores: true
+            }
+        });
+        res.render('mysite', { proyectoGrupales });
+    } catch (error) {
+        console.error('Error al recuperar datos:', error);
+        res.status(500).send("Error al cargar la página");
+    }
 });
+
 module.exports = router;
