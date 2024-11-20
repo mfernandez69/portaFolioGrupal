@@ -11,7 +11,12 @@ router.get('/', async (req, res) => {
                 colaboradores: true
             }
         });
-        res.render('mysite', { proyectoGrupales });
+        const proyectosIndividuales = await prisma.proyectoIndividual.findMany({
+            include: {
+                colaboradores: true
+            }
+        });
+        res.render('mysite', { proyectoGrupales, proyectosIndividuales });
     } catch (error) {
         console.error('Error al recuperar datos:', error);
         res.status(500).send("Error al cargar la página");
