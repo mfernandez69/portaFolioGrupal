@@ -45,8 +45,8 @@ app.post('/enviar-correo', async (req, res) => {
 
         // Configura el correo
         let info = await transporter.sendMail({
-            from: '"Tu Nombre" <Marcos>',
-            to: "megatarzan280@gmail.com",
+            from: '"Contacto porfolio grupal" <Nombre>',
+            to: `${email}`,
             subject: "Nuevo mensaje de contacto",
             text: `Nombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\n\nMensaje:\n${message}`,
             html: `<p><strong>Nombre:</strong> ${name}</p>
@@ -57,10 +57,12 @@ app.post('/enviar-correo', async (req, res) => {
         });
 
         console.log("Mensaje enviado: %s", info.messageId);
-        res.status(200).send('Mensaje enviado correctamente');
+        // Redirige a la página principal
+        res.redirect('/');
     } catch (error) {
         console.error('Error al enviar el correo:', error);
-        res.status(500).send('Error al enviar el mensaje');
+        // Redirige a la página principal con un mensaje de error
+        res.redirect('/?error=true');
     }
 });
 
