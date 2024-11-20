@@ -83,7 +83,7 @@ async function insertarVariosDocumentos() {
           lenguajesUtilizados: ['PHP','JavaScript'],
           enlacesGithub: ['https://github.com/RMontesJ/tienda-online'],
           colaboradores: {
-            connect: [{ id: colaboradores[1].id }]
+            connect: [{ id: colaboradores[2].id }]
           }
         },
         include: {

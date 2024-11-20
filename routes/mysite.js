@@ -4,6 +4,8 @@ const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
 
+//utilizamos router para especificar que al cargar la pagina principal se rendericen
+//los proyectos en las seccion de proyectos
 router.get('/', async (req, res) => {
     try {
         const proyectoGrupales = await prisma.proyectoGrupal.findMany({

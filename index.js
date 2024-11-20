@@ -34,12 +34,12 @@ app.post('/enviar-correo', async (req, res) => {
     try {
         const { name, email, phone, message } = req.body;
 
-        // Configura el transporter de nodemailer
+        // Configura el transporter de nodemailer para poder mandar el correo desde un gmail
         let transporter = nodemailer.createTransport({
             service: 'gmail',  // Usa Gmail como servicio
             auth: {
                 user: 'fernandemarcos11@gmail.com',
-                pass: 'uake nhus vzkp iduc'  // Usa una contraseña de aplicación de Gmail
+                pass: 'uake nhus vzkp iduc'  // Usa una contraseña de varificacion 2 pasos de la aplicación de Gmail
             }
         });
 
@@ -62,7 +62,7 @@ app.post('/enviar-correo', async (req, res) => {
     } catch (error) {
         console.error('Error al enviar el correo:', error);
         // Redirige a la página principal con un mensaje de error
-        res.redirect('/?error=true');
+        res.redirect('/');
     }
 });
 

@@ -1,17 +1,18 @@
 
-<!-- Portfolio Section-->
+<!-- Secion de los proyectos-->
 <section class="page-section portfolio" id="portfolio">
     <div class="container">
         <!-- Portfolio Section Heading-->
-        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Portfolio</h2>
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Proyectos</h2>
         <!-- Icon Divider-->
         <div class="divider-custom">
             <div class="divider-custom-line"></div>
             <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
             <div class="divider-custom-line"></div>
         </div>
-        <!-- Portfolio Grid Items-->
+        <!-- Sección de los proyectos-->
         <div class="row justify-content-center">
+            {{!-- Mediante este bucle imprimimos los proyectos grupales obtenidos en mysite.js --}}
             {{#each proyectoGrupales}}
             <div class="col-md-6 col-lg-4 mb-5">
                 <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal{{id}}">
@@ -22,6 +23,7 @@
                 </div>
             </div>
             {{/each}}
+            {{!-- Aquí generamos los individuales --}}
             {{#each proyectosIndividuales}}
             <div class="col-md-6 col-lg-4 mb-5">
                 <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal{{id}}">
@@ -35,5 +37,5 @@
         </div>
     </div>
 </section>
-<!-- Include Portfolio Modals -->
+<!-- Incluimos las ventanas modales de cada proyecto para que se vea la info de cada uno-->
 {{> fichaProyecto}}
