@@ -38,15 +38,15 @@ app.post('/enviar-correo', async (req, res) => {
         let transporter = nodemailer.createTransport({
             service: 'gmail',  // Usa Gmail como servicio
             auth: {
-                user: 'fernandemarcos11@gmail.com',
-                pass: 'uake nhus vzkp iduc'  // Usa una contraseña de varificacion 2 pasos de la aplicación de Gmail
+                user: process.env.GMAIL_USER,
+                pass: process.env.GMAIL_PASS //Usa una contraseña de varificacion 2 pasos de la aplicación de Gmail
             }
         });
 
         // Configura el correo
         let info = await transporter.sendMail({
             from: '"Contacto porfolio grupal" <Nombre>',
-            to: `${email}`,
+            to: process.env.GMAIL_USER,
             subject: "Nuevo mensaje de contacto",
             text: `Nombre: ${name}\nEmail: ${email}\nTeléfono: ${phone}\n\nMensaje:\n${message}`,
             html: `<p><strong>Nombre:</strong> ${name}</p>
