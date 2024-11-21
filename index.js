@@ -43,6 +43,7 @@ app.post('/enviar-correo', async (req, res) => {
             }
         });
 
+        
         // Configura el correo
         let info = await transporter.sendMail({
             from: '"Contacto porfolio grupal" <Nombre>',
