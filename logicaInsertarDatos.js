@@ -27,7 +27,7 @@ async function insertarVariosDocumentos() {
             usuarioGithub: 'Fsolanaa',
             numeroTelefono: '+34 628 25 89 10'
           },
-          lenguajesProgramacion: ['Java', 'JavaScript','Kotlin','SQL']
+          lenguajesProgramacion: ['Java', 'JavaScript', 'Kotlin', 'SQL', 'C#']
         }
       }),
       prisma.colaborador.create({
@@ -51,7 +51,7 @@ async function insertarVariosDocumentos() {
             usuarioGithub: 'Jestebanl',
             numeroTelefono: '+34 670 10 68 22'
           },
-          lenguajesProgramacion: ['PHP', 'Java','JavaScript','Kotlin','SQL']
+          lenguajesProgramacion: ['PHP', 'Java','JavaScript','Kotlin','SQL', 'C#']
         }
       })
     ]);
