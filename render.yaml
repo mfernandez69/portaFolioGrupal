@@ -1,0 +1,3 @@
+DATABASE_URL="mongodb+srv://basicUser:1234@dbportafolio.evxit.mongodb.net/dbPortafolio?retryWrites=true&w=majority&appName=dbPortafolio"
+GMAIL_USER = fernandemarcos11@gmail.com
+GMAIL_PASS = uake nhus vzkp iduc
