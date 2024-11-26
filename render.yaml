@@ -1,3 +1,43 @@
-DATABASE_URL="mongodb+srv://basicUser:1234@dbportafolio.evxit.mongodb.net/dbPortafolio?retryWrites=true&w=majority&appName=dbPortafolio"
-GMAIL_USER = fernandemarcos11@gmail.com
-GMAIL_PASS = uake nhus vzkp iduc
+databases:
+  - name: dbPortafolio
+    databaseName: dbportafolio
+    user: basicUser
+
+services:
+  - type: web
+    name: PorfolioTortugasNinja
+    runtime: node
+    plan: standard
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        value: mongodb+srv://basicUser:1234@dbportafolio.evxit.mongodb.net/dbPortafolio?retryWrites=true&w=majority&appName=dbPortafolio
+      - key: GMAIL_USER
+        value: fernandemarcos11@gmail.com
+      - key: GMAIL_PASS
+        value: uake nhus vzkp iduc
+
+# Elimina o comenta las partes que no necesites
+# - type: worker
+#   name: spree-worker
+#   runtime: ruby
+#   buildCommand: "./bin/render-build.sh"
+#   startCommand: "bundle exec rake solid_queue:start"
+#   envVars:
+#     - key: DATABASE_URL
+#       fromDatabase:
+#         name: spree-db
+#         property: connectionString
+
+# envVarGroups:
+#   - name: spree-settings
+#     envVars:
+#       - key: SECRET_KEY_BASE
+#         generateValue: true
+#       - key: ADMIN_EMAIL
+#         value: 'spree@example.com'
+#       - key: ADMIN_PASSWORD
+#         value: 'spree123'
+#       - key: AUTO_ACCEPT
+#         value: 'true'
