@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
                 colaboradores: true
             }
         });
-        res.render('mysite', { proyectoGrupales, proyectosIndividuales });
+        res.render('mysite', { proyectoGrupales });
     } catch (error) {
         console.error('Error al recuperar datos:', error);
         res.status(500).send("Error al cargar la página");
